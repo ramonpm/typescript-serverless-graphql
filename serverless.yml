@@ -35,6 +35,13 @@ functions:
           cors: true
     environment:
       TABLE_NAME: products-gql
+  playground:
+    handler: handler.playground
+    events:
+    - http:
+        path: /
+        method: get
+        cors: true
 
 resources:
   Resources:

@@ -19,6 +19,7 @@
   },
   "dependencies": {
     "aws-sdk": "^2.411.0",
-    "graphql": "^14.1.1"
+    "graphql": "^14.1.1",
+    "graphql-yoga": "^1.17.4"
   }
 }
