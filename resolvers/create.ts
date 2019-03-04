@@ -1,9 +1,7 @@
-import * as AWS from 'aws-sdk';
 import { v1 } from 'uuid';
+import dynamoDb from '../config/database';
 
-const dynamoDb = new AWS.DynamoDB.DocumentClient();
-
-const addProduct = (data) => {
+const addProduct = async (data: { [x: string]: any; name?: any; quantity?: any; }) => {
   const params = {
     TableName: process.env.TABLE_NAME,
     Item: {
@@ -13,7 +11,8 @@ const addProduct = (data) => {
       addedAt: Date.now()
     }
   };
-  return dynamoDb.put(params).promise().then(_result => params.Item)
+  await dynamoDb.put(params).promise();
+  return params.Item;
 };
 
 export default addProduct;

@@ -1,13 +1,12 @@
-import * as AWS from 'aws-sdk';
+import dynamoDb from "../config/database";
 
-const dynamoDb = new AWS.DynamoDB.DocumentClient();
-
-const viewProduct = (id) => {
+const viewProduct = async (id: any) => {
   const params = {
     TableName: process.env.TABLE_NAME,
     Key: { id }
   };
-  return dynamoDb.get(params).promise().then(r => r.Item);
+  const r = await dynamoDb.get(params).promise();
+  return r.Item;
 };
 
 export default viewProduct;

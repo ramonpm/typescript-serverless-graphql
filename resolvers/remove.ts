@@ -1,8 +1,6 @@
-import * as AWS from 'aws-sdk';
+import dynamoDb from "../config/database";
 
-const dynamoDb = new AWS.DynamoDB.DocumentClient();
-
-const removeProduct = (id) => {
+const removeProduct = (id: any) => {
   const params = {
     TableName: process.env.TABLE_NAME,
     Key: { id }

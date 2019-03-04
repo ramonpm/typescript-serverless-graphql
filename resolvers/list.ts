@@ -1,6 +1,4 @@
-import * as AWS from 'aws-sdk';
-
-const dynamoDb = new AWS.DynamoDB.DocumentClient();
+import dynamoDb from "../config/database";
 
 const listProducts = () => dynamoDb.scan({
   TableName: process.env.TABLE_NAME

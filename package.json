@@ -9,6 +9,8 @@
     "@types/graphql": "^14.0.7",
     "@types/node": "^11.9.5",
     "@types/uuid": "^3.4.4",
+    "serverless-dynamodb-local": "^0.2.36",
+    "serverless-offline": "^4.7.1",
     "serverless-webpack": "^5.2.0",
     "source-map-support": "^0.5.10",
     "ts-loader": "^5.3.3",
