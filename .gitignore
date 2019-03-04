@@ -59,3 +59,12 @@ typings/
 
 # next.js build output
 .next
+
+# Serverless directories
+.serverless
+
+# Webpack directories
+.webpack
+
+# Built dir
+lib
