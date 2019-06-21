@@ -68,3 +68,5 @@ typings/
 
 # Built dir
 lib
+
+.dynamodb

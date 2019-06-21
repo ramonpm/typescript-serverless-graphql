@@ -1,5 +1,6 @@
-const path = require('path');
-const slsw = require('serverless-webpack');
+const path = require("path");
+const slsw = require("serverless-webpack");
+var nodeExternals = require("webpack-node-externals");
 
 const entries = {};
 
@@ -8,22 +9,35 @@ Object.keys(slsw.lib.entries).forEach(
 );
 
 module.exports = {
-  mode: slsw.lib.webpack.isLocal ? 'development' : 'production',
   entry: entries,
-  devtool: 'source-map',
+  mode: "development",
+  devtool: "source-map",
   resolve: {
-    extensions: ['.mjs', '.js', '.jsx', '.json', '.ts', '.tsx'],
+    extensions: [".js", ".json", ".ts", ".tsx"]
   },
+  // externals: ['aws-sdk'],
+  externals: [nodeExternals()],
   output: {
-    libraryTarget: 'commonjs',
-    path: path.join(__dirname, '.webpack'),
-    filename: '[name].js',
+    libraryTarget: "commonjs",
+    path: path.join(__dirname, ".webpack"),
+    filename: "[name].js"
   },
-  target: 'node',
+  target: "node",
   module: {
     rules: [
-      // all files with a `.ts` or `.tsx` extension will be handled by `ts-loader`
-      { test: /\.tsx?$/, loader: 'ts-loader' },
-    ],
-  },
+      {
+        test: /\.ts(x?)$/,
+        use: [
+          {
+            loader: "ts-loader"
+          }
+        ]
+      },
+      {
+        test: /\.mjs$/,
+        include: /node_modules/,
+        type: "javascript/auto"
+      }
+    ]
+  }
 };
