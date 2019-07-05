@@ -4,7 +4,7 @@ Starting point for building a `Lambda + GraphQL + DynamoDB + Typescript + Webpac
 ```bash
 yarn install
 sls dynamodb install
-sls offline start
+yarn start
 ```
 
 # CRUD Operations sample
