@@ -1,43 +1,47 @@
-const path = require("path");
-const slsw = require("serverless-webpack");
-var nodeExternals = require("webpack-node-externals");
+const path = require('path');
 
-const entries = {};
+const slsw = require('serverless-webpack');
 
-Object.keys(slsw.lib.entries).forEach(
-  key => (entries[key] = ['./source-map-install.js', slsw.lib.entries[key]])
-);
+// This helper function is not strictly necessary.
+function srcPath(subdir) {
+  return path.join(__dirname, subdir);
+}
 
 module.exports = {
-  entry: entries,
-  mode: "development",
-  devtool: "source-map",
+  // devtool: "cheap-module-eval-source-map",
+  entry: slsw.lib.entries,
+  externals: [],
+  mode: process.env.NODE_ENV || 'development',
+  devtool: 'source-map',
   resolve: {
-    extensions: [".js", ".json", ".ts", ".tsx"]
+    extensions: ['.mjs', '.js', '.jsx', '.json', '.ts', '.tsx', '.graphql', '.gql'],
+    alias: {
+      'node-fetch$': 'node-fetch/lib/index.js',
+      '@common': srcPath('src/common'),
+      '@config': srcPath('config'),
+    },
+    enforceExtension: false,
   },
-  // externals: ['aws-sdk'],
-  externals: [nodeExternals()],
   output: {
-    libraryTarget: "commonjs",
-    path: path.join(__dirname, ".webpack"),
-    filename: "[name].js"
+    libraryTarget: 'commonjs',
+    path: srcPath('.webpack'),
+    filename: '[name].js',
   },
-  target: "node",
+  target: 'node',
   module: {
     rules: [
+      { test: /\.ts(x?)$/, loader: 'ts-loader' },
+      { test: /\.graphql|gql?$/, loader: 'webpack-graphql-loader' },
       {
-        test: /\.ts(x?)$/,
-        use: [
-          {
-            loader: "ts-loader"
-          }
-        ]
+        test: /\.pug$/,
+        loader: 'pug-loader',
+        options: { root: srcPath('src/constants/email-templates') },
       },
       {
+        type: 'javascript/auto', // required for the apollo-graphql
         test: /\.mjs$/,
-        include: /node_modules/,
-        type: "javascript/auto"
-      }
-    ]
-  }
+        use: [],
+      },
+    ],
+  },
 };
