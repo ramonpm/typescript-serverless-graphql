@@ -10,7 +10,7 @@ function srcPath(subdir) {
 module.exports = {
   // devtool: "cheap-module-eval-source-map",
   entry: slsw.lib.entries,
-  externals: [],
+  externals: ['bufferutil', 'utf-8-validate'],
   mode: process.env.NODE_ENV || 'development',
   devtool: 'source-map',
   resolve: {

@@ -27,11 +27,11 @@ provider:
 
 functions:
   queryProducts:
-    handler: handler.graphql
+    handler: src/handler.graphql
     events:
       - http:
           path: products
-          method: post
+          method: any
           cors: true
     environment:
       TABLE_NAME: products-gql
