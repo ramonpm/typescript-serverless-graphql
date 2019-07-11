@@ -58,3 +58,4 @@ custom:
       migrate: true
     stages:
       - dev
+      - test
