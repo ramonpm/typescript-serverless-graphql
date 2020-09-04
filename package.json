@@ -36,6 +36,6 @@
     "aws-sdk": "^2.488.0",
     "graphql": "^14.4.2",
     "reflect-metadata": "^0.1.13",
-    "type-graphql": "^0.17.4"
+    "type-graphql": "^0.17.6"
   }
 }
