@@ -33,7 +33,7 @@
   },
   "dependencies": {
     "apollo-server-lambda": "^2.6.7",
-    "aws-sdk": "^2.488.0",
+    "aws-sdk": "^2.814.0",
     "graphql": "^14.4.2",
     "reflect-metadata": "^0.1.13",
     "type-graphql": "^0.17.4"
